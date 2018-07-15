@@ -5,7 +5,7 @@ import io
 from google.cloud import vision
 from google.cloud.vision import types
 from PIL import Image, ImageDraw
-
+import json
 
 class FeatureType(Enum):
     PAGE = 1
@@ -41,6 +41,11 @@ def get_document_bounds(image_file, feature):
 
     response = client.document_text_detection(image=image)
     document = response.full_text_annotation
+
+    print(response)
+
+    #with open('data.txt', 'w') as outfile:
+    #    json.dump(document, outfile)
 
     # Collect specified feature bounds by enumerating all document features
     for page in document.pages:
